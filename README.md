@@ -18,7 +18,7 @@ Scaffolded with
 
 Additional
 
-- Prisma, GraphQL
+- Prisma, GraphQL, Apollo Client/Server
 - Storybook
 - Cypress, React Testing Library, Gherkin (TDD)
 - Authentication with NextAuth/Auth0
