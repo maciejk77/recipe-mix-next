@@ -24,7 +24,7 @@ const Layout: FunctionComponent<IProps> = ({ main }) => {
           </Link>
           {auth ? (
             <>
-              <div>
+              <div data-testid="nav-tabs">
                 <Link href="/">Home</Link>
                 {' | '}
                 <Link href="/recipes">Recipes</Link>

@@ -23,10 +23,6 @@ describe('User is signed in', () => {
     cy.visit('/');
   });
 
-  it('should render home page', () => {
-    cy.visit('/');
-  });
-
   it('should show welcome message', () => {
     cy.findByText(/welcome/i);
   });
@@ -35,10 +31,41 @@ describe('User is signed in', () => {
     cy.findByRole('button', { name: /logout/i });
   });
 
-  // it('should display navigation options (Home|Recipes|Add Recipe)', () => {});
+  it('should display navigation options (Home|Recipes|Add Recipe)', () => {
+    cy.get('[data-testid="nav-tabs"]').should('exist');
+  });
 
-  // it('should show the list of recipes', () => {});
+  it('should show the list of recipes', () => {
+    cy.visit('/recipes');
+    cy.url().should('include', '/recipes');
+    cy.get('[data-testid="recipes"]').should('exist');
+  });
 
+  it('should show the add recipes', () => {
+    cy.visit('/recipes/add');
+    cy.url().should('include', '/recipes/add');
+    cy.get('[data-testid="add-recipe"]').should('exist');
+  });
+
+  it('should show the edit recipes', () => {
+    cy.visit('/recipes/1/edit');
+    cy.url().should('include', '/edit');
+    cy.get('[data-testid="edit-recipe"]').should('exist');
+  });
+
+  it('should show home and redirect to home page on click', () => {
+    cy.visit('/recipes');
+    cy.url().should('include', '/recipes');
+    cy.findByText('Add Recipe').click();
+    cy.url().should('include', '/recipes/add');
+  });
+
+  it('should allow to logout and then log back in', () => {
+    cy.findByRole('button', { name: /logout/i }).click();
+    cy.findByRole('button', { name: /sign in/i });
+    cy.findByRole('button', { name: /sign in/i }).click();
+    cy.findByRole('button', { name: /logout/i });
+  });
   // it("should show a chosen recipe information", () => {});
 
   // it("should show (add|edit) options for user who created the recipe", () => {});
